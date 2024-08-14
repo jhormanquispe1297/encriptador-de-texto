@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de Texto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Encriptador de Texto</h1>
+    <label for="texto">Texto a encriptar:</label>
+    <textarea id="texto"></textarea>
+    
+    <label for="clave">Clave de desplazamiento:</label>
+    <input type="number" id="clave" value="3">
+    
+    <button onclick="encriptar()">Encriptar</button>
+    <button onclick="desencriptar()">Desencriptar</button>
+
+    <h2>Resultado:</h2>
+    <textarea id="resultado" readonly></textarea>
+
+    <script>
+        function encriptar() {
+            const texto = document.getElementById('texto').value;
+            const clave = parseInt(document.getElementById('clave').value);
+            const resultado = texto.split('').map(char => {
+                return String.fromCharCode(char.charCodeAt(0) + clave);
+            }).join('');
+            document.getElementById('resultado').value = resultado;
+        }
+
+        function desencriptar() {
+            const texto = document.getElementById('resultado').value;
+            const clave = parseInt(document.getElementById('clave').value);
+            const resultado = texto.split('').map(char => {
+                return String.fromCharCode(char.charCodeAt(0) - clave);
+            }).join('');
+            document.getElementById('resultado').value = resultado;
+        }
+    </script>
+</body>
+</html>
